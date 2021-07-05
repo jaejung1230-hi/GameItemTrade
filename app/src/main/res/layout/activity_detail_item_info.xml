@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddItemActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/iv_itemImage_Detail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/nonephoto"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_itemTitle"
+                android:textSize="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_seller"
+                android:textAlignment="textEnd"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF"
+                android:background="#FF8000"
+                android:layout_gravity="end"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_itemPrice"
+                    android:inputType="number"
+                    android:hint="가격"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/detail_itemKinds"
+                    android:spinnerMode="dialog"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_gameTitle"
+                    android:spinnerMode="dialog"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:textSize="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_gameServer"
+                    android:spinnerMode="dialog"
+                    android:layout_weight="2"/>
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detail_itemExplain"
+                />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_login_button"
+            android:text="찜"
+            android:drawableLeft="@drawable/ic_star_border"
+            android:drawablePadding="-25dp"
+            android:textStyle="bold"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/main_color"
+            android:textSize="20dp"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_makechat"
+            android:background="@drawable/custom_solid_buttom"
+            android:text="채팅으로 문의하기"
+            android:textStyle="bold"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="45dp"
+        android:text="테스트"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/main_color"
+        android:background="@drawable/custom_login_button"
+        android:id="@+id/gamelist_recycler_title"
+        android:gravity="center_horizontal" />
+
+</LinearLayout>

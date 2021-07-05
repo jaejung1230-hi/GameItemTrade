@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="kinds_array">
+        <item>gold</item>
+        <item>장비아이템</item>
+        <item>캐시아이템</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="game_array">
+        <item name="메이플스토리" >maplestory_server_array</item>
+        <item name="로스트아크" >lostark_server_array</item>
+        <item name="던전앤파이터" >dungunandfighter_server_array</item>
+    </string-array>
+
+</resources>

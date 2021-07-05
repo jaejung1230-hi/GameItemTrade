@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Main_Fragment.MyPageFragment"
+    android:orientation="vertical">
+
+<LinearLayout
+    android:id="@+id/layout_profile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="50dp"
+        app:cardElevation="0dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <ImageView
+        android:id="@+id/img_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:scaleType = "fitXY"
+        android:src="@drawable/nonephoto"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_loginusername"
+        android:textSize="20dp"
+        android:layout_margin="10dp"
+        android:text="@string/hello_blank_fragment" />
+
+</LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="프로필 수정"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:backgroundTint="@color/main_color"
+        android:id="@+id/btn_temp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview_chatlist"
+        android:visibility="invisible"/>
+
+
+</LinearLayout>
