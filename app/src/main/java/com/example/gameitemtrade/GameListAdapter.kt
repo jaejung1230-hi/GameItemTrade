@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gameitemtrade.Main_Fragment.PageActivity
+import com.example.gameitemtrade.Tasks.UserInfoTask
 
 class GameListAdapter(private val items: Array<game_array>) : RecyclerView.Adapter<GameListAdapter.ViewHolder>() {
 
@@ -34,6 +35,7 @@ class GameListAdapter(private val items: Array<game_array>) : RecyclerView.Adapt
         class ViewHolder(private var v: View) : RecyclerView.ViewHolder(v){
             val gamelist_recycler_title: TextView = v.findViewById(R.id.gamelist_recycler_title)
             fun bind(listener: View.OnClickListener, item: game_array){
+                val userInfoTask = UserInfoTask()
                 v.setOnClickListener(listener)
                 gamelist_recycler_title.setText(item.name)
             }

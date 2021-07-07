@@ -1,15 +1,15 @@
-package com.example.gameitemtrade
+package com.example.gameitemtrade.Chat
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.net.URL
+import com.example.gameitemtrade.R
+import com.squareup.picasso.Picasso
 import java.util.ArrayList
 
 class ChatAdapter(val context: Context, val arrayList: ArrayList<ChatModel>, val myId:String) :  RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -48,6 +48,7 @@ class ChatAdapter(val context: Context, val arrayList: ArrayList<ChatModel>, val
         }
         //onCreateViewHolder에서 리턴받은 뷰홀더가 Holder2라면 상대의 채팅, item_your_chat의 뷰들을 초기화 해줌
         else if(holder is Holder2) {
+            Picasso.get().load(arrayList.get(position).profileImg).error(R.drawable.nonephoto).into((holder as Holder2).chat_Other_img);
             (holder as Holder2).chat_Other_Name?.setText(arrayList.get(position).name)
             (holder as Holder2).chat_Text?.setText(arrayList.get(position).script)
             (holder as Holder2).chat_Time?.setText(arrayList.get(position).date_time)
@@ -65,6 +66,7 @@ class ChatAdapter(val context: Context, val arrayList: ArrayList<ChatModel>, val
     inner class Holder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         //친구목록 모델의 변수들 정의하는부분
+        val chat_Other_img = itemView?.findViewById(R.id.chat_Other_img) as ImageView
         val chat_Other_Name = itemView?.findViewById(R.id.chat_Other_Name) as TextView
         val chat_Text = itemView?.findViewById(R.id.chat_Text) as TextView
         val chat_Time = itemView?.findViewById(R.id.chat_Time) as TextView

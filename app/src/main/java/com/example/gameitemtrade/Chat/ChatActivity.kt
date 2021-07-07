@@ -1,19 +1,23 @@
-package com.example.gameitemtrade
+package com.example.gameitemtrade.Chat
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gameitemtrade.Data.ItemInfomation
+import com.example.gameitemtrade.Data.User
+import com.example.gameitemtrade.R
+import com.example.gameitemtrade.Tasks.ChatTask
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.java_websocket.WebSocket
 import org.java_websocket.client.WebSocketClient
 import org.java_websocket.drafts.Draft_6455
 import org.java_websocket.handshake.ServerHandshake
+import org.json.JSONArray
 import java.net.URI
 import java.net.URISyntaxException
 import java.text.SimpleDateFormat
@@ -25,10 +29,12 @@ class ChatActivity : AppCompatActivity() {
     internal lateinit var preferences: SharedPreferences
     private lateinit var chating_Text: EditText
     private lateinit var chat_Send_Button: Button
-    private lateinit var userId: String
+    lateinit var chatroom : String
+    val userId = User.userID
+    lateinit var sender : String
 
     var arrayList = arrayListOf<ChatModel>()
-    lateinit var mAdapter:ChatAdapter
+    lateinit var mAdapter: ChatAdapter
     lateinit var uri: URI
     lateinit var mWebSocketClient: WebSocketClient
 
@@ -39,22 +45,48 @@ class ChatActivity : AppCompatActivity() {
         preferences = getSharedPreferences("USERSIGN", Context.MODE_PRIVATE)
         val url = "ws://192.168.55.69:8090/connectDB/websocket"
         try { uri = URI(url)
-            Log.d("test","websockethost clear!!!!!!!!!!!!!")
         }catch(e: URISyntaxException) {
             e.printStackTrace()
             return
         }
 
         val secondIntent = intent
-        userId = secondIntent.getStringExtra("userId").toString()
-        mAdapter = ChatAdapter(this, arrayList,userId)
+        chatroom = secondIntent.getStringExtra("chatroom").toString()
 
-        //어댑터 선언
+        val other = secondIntent.getStringExtra("Other").toString()
+        val other_user = JSONArray(other).getJSONObject(0)
+
+        val ChatTask = ChatTask()
+        val result =ChatTask.execute(chatroom).get()
+        if (!result.equals("[]")) {
+            val chatArray = JSONArray(result)
+            for (i in 0..(chatArray.length()-1)){
+                val owner = chatArray.getJSONObject(i).getString("from_ID")
+                lateinit var msgname :String
+                if(owner.equals(User.userID)) {
+                    msgname = User.userID
+                }else{msgname = other_user.getString("nickName")}
+                val chat = ChatModel(
+                        other_user.getString("profilePicture"),
+                        msgname,
+                        chatArray.getJSONObject(i).getString("message"),
+                        chatArray.getJSONObject(i).getString("date")
+                )
+
+                arrayList.add(chat)
+            }
+        }
+
+        val str = chatroom!!.split("_")
+        val productID = str[1]
+        if(str[2].equals(userId)){ sender=str[3]
+        }else{                  sender=str[2] }
+
+        mAdapter = ChatAdapter(this, arrayList, userId)
         chat_recyclerview.adapter = mAdapter
-        //레이아웃 매니저 선언
         val lm = LinearLayoutManager(this)
         chat_recyclerview.layoutManager = lm
-        chat_recyclerview.setHasFixedSize(true)//아이템이 추가삭제될때 크기측면에서 오류 안나게 해줌
+        chat_recyclerview.setHasFixedSize(true)
 
         chat_Send_Button = findViewById(R.id.chat_Send_Button)
         chating_Text = findViewById(R.id.chating_Text)
@@ -62,13 +94,11 @@ class ChatActivity : AppCompatActivity() {
         try {
             mWebSocketClient = object : WebSocketClient(uri, Draft_6455()) {
                 override fun onError(ex: Exception?) {
-                    // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     Log.d("test","onError")
                     Log.d("test", ex?.stackTrace.toString())
                 }
                 
                 override fun onClose(code: Int, reason: String?, remote: Boolean) {
-                    // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     Log.d("test","onClose")
                     Log.d("test",reason!!)
                 }
@@ -77,24 +107,24 @@ class ChatActivity : AppCompatActivity() {
                     // Opened do some stuff
                     Log.d("test","onOpen")
                 }
-                override fun onMessage(s: String) { //서버에서 메세지를 받았을 때때
-                    val chatMsg = s
-                    val now = System.currentTimeMillis()
-                    val date = Date(now)
-                    val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm")
-                    val getTime = sdf.format(date)
-
+                override fun onMessage(chatMsg: String) { //서버에서 메세지를 받았을 때때
+                    val msg = chatMsg.split("/")
                     Log.d("test","chat"+chatMsg)
-                    val sendchatMsg = chatMsg.split(":")
-                    val item = ChatModel(sendchatMsg[0],sendchatMsg[1], getTime)
-                    mAdapter.addItem(item)
-                    mAdapter.notifyDataSetChanged()
+                    if(msg[0].equals(chatroom)){
+                        val item = ChatModel(
+                                other_user.getString("profilePicture"),
+                                other_user.getString("nickName"),
+                                msg[3],
+                                msg[4]
+                        )
+                        mAdapter.addItem(item)
+                        mAdapter.notifyDataSetChanged()
+                    }
                 }
             }
         }catch(e: Exception) {
             e.printStackTrace()
         }
-
 
         mWebSocketClient.connect()
 
@@ -106,22 +136,28 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-
     fun sendMessage() {
         val now = System.currentTimeMillis()
         val date = Date(now)
-        //나중에 바꿔줄것 밑의 yyyy-MM-dd는 그냥 20xx년 xx월 xx일만 나오게 하는 식
-        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm")
-
+        val sdf = SimpleDateFormat("yyyy-MM-dd_hh:mm")
         val getTime = sdf.format(date)
 
-
-        //example에는 원래는 이미지 url이 들어가야할 자리
-        val item = ChatModel(userId,chating_Text.text.toString(), getTime)
+        val item = ChatModel(
+            User.profilePicture,
+            userId,
+            chating_Text.text.toString(),
+            getTime
+        )
         mAdapter.addItem(item)
         mAdapter.notifyDataSetChanged()
-        mWebSocketClient.send(chating_Text.getText().toString())
+        var message = chatroom+"/"+sender+"/"+userId+"/"+chating_Text.getText().toString()+"/"+getTime
+        mWebSocketClient.send(message)
         //채팅 입력창 초기화
         chating_Text.setText("")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mWebSocketClient.close()
     }
 }

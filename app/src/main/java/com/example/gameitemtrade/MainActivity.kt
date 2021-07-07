@@ -12,8 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.gameitemtrade.Tasks.JspTask
-import com.example.gameitemtrade.Tasks.TempTask
+import com.example.gameitemtrade.Tasks.LoginTask
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"비밀번호를 입력해주세요!!",Toast.LENGTH_SHORT).show()
             }
             else{
-                val loginTask = JspTask()
+                val loginTask = LoginTask()
                 val result = loginTask.execute(loginId, loginPassword).get()
 
                 if(result.equals("None")){

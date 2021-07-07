@@ -22,10 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameItemTrade"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserInfoActivity"></activity>
+        <activity android:name=".Chat.ChatRoomActivity"></activity>
+        <activity android:name=".UserInfoActivity" />
         <activity android:name=".ChangeProfileActivity" />
         <activity android:name=".TempActivity" />
-        <activity android:name=".ChatActivity" />
+        <activity android:name=".Chat.ChatActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

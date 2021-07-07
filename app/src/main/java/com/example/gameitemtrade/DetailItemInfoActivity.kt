@@ -29,7 +29,6 @@ class DetailItemInfoActivity : AppCompatActivity() {
         val secondIntent = intent
         val buyer = User.userID
         val item = secondIntent.getParcelableExtra<ItemInfomation>("item")
-        Toast.makeText(this,"id 체크 ${item?.productId}",Toast.LENGTH_SHORT).show()
         Picasso.get().load(item?.fileName).error(R.drawable.nonephoto).into(iv_itemImage)
         Log.d("test", "로 : " + item?.fileName)
         detail_itemTitle.setText(item?.title)
@@ -50,7 +49,10 @@ class DetailItemInfoActivity : AppCompatActivity() {
                 Toast.makeText(this,"자신의 아이템은 구매할 수 없어요!",Toast.LENGTH_SHORT).show()
             }else{
                 val chatRoomTask = ChatRoomTask()
-                chatRoomTask.execute(seller, buyer,"Make_ChattingRoom").get()
+                val result = chatRoomTask.execute(seller, buyer, item?.productId).get()
+                if(result.equals("Clear")){
+                    Toast.makeText(this, "채팅방이 생성이 완료됐습니다.",Toast.LENGTH_SHORT).show()
+                }else{Toast.makeText(this, "채팅방이 이미 생성되었습니다.",Toast.LENGTH_SHORT).show()}
             }
         }
     }

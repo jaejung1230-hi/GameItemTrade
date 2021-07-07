@@ -5,10 +5,10 @@ import com.example.gameitemtrade.Data.User
 import okhttp3.*
 import org.json.JSONArray
 
-public class ChatTask : AsyncTask<String, Void, String>(){
+public class FindChatTask : AsyncTask<String, Void, String>(){
 
     override fun doInBackground(vararg params: String?): String {
-        val url = "http://192.168.55.69:65001/bring_chat"
+        val url = "http://192.168.55.69:65001/Find_ChattingRoom"
         val client = OkHttpClient()
         val requestBody : RequestBody = FormBody.Builder()
                 .add("name",params[0])

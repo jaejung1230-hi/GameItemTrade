@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.gameitemtrade.Tasks.JspTask
 import com.example.gameitemtrade.Tasks.UserInfoTask
 import com.squareup.picasso.Picasso
 import org.json.JSONArray

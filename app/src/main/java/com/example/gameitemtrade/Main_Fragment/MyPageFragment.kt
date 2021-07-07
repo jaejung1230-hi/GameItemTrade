@@ -12,8 +12,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gameitemtrade.ChangeProfileActivity
+import com.example.gameitemtrade.Chat.ChatRoomActivity
 import com.example.gameitemtrade.Data.User
 import com.example.gameitemtrade.R
+import com.example.gameitemtrade.Tasks.ChatRoomTask
 import com.example.gameitemtrade.UserInfoActivity
 import com.squareup.picasso.Picasso
 
@@ -35,11 +37,16 @@ class MyPageFragment : Fragment() {
         img_profile = v.findViewById(R.id.img_profile) as ImageView
         val layout_profile = v.findViewById(R.id.layout_profile) as LinearLayout
 
-        val recyclerview_chatlist = v.findViewById(R.id.recyclerview_chatlist) as RecyclerView
-        val btn_temp = v.findViewById(R.id.btn_temp) as Button
+        val btn_update_profile = v.findViewById(R.id.btn_update_profile) as Button
+        val btn_my_chat = v.findViewById(R.id.btn_my_chat) as Button
 
-        btn_temp.setOnClickListener {
+        btn_update_profile.setOnClickListener {
             var intent = Intent(requireContext(), ChangeProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        btn_my_chat.setOnClickListener {
+            var intent = Intent(requireContext(), ChatRoomActivity::class.java)
             startActivity(intent)
         }
 

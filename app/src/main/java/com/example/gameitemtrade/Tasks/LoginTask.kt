@@ -10,7 +10,7 @@ import org.json.JSONArray
 // UI는 메인스레드에서만 이용가능
 // doInBackground 작업중 publishProgress( )메소드 이용 UI접근 가능
 
-public class JspTask : AsyncTask<String, Void, String>(){
+public class LoginTask : AsyncTask<String, Void, String>(){
 
     //vararg var 초기화 이후에도 변경가능한 arg 가변길이
     override fun doInBackground(vararg params: String?): String {
