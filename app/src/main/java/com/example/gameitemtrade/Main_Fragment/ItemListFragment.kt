@@ -50,7 +50,6 @@ class ItemListFragment : Fragment() {
 
         val itemInfoList = getDBitemtoArrayList(gameTitle!!, kindForSearch, serverForSearch, titleForsearch)
         if (itemInfoList != null) {
-
             val adapter = ItemListAdapter(itemInfoList)
             recyclerview_itemlist.setLayoutManager(LinearLayoutManager(requireContext()))
             recyclerview_itemlist.setAdapter(adapter)
@@ -90,8 +89,6 @@ class ItemListFragment : Fragment() {
     fun getDBitemtoArrayList(gameTitle: String, kindForSearch: String, serverForSearch: String, titleForsearch: String): ArrayList<ItemInfomation>? {
         val tTask2 = GetItemTask()
         var result = tTask2.execute(gameTitle, kindForSearch, serverForSearch, titleForsearch,"Get_ItemList_Title").get()
-
-        Log.d("test", "지금 검사중  : " + result)
 
         if (!result.equals("[]")) {
             val itemListArray = JSONArray(result)

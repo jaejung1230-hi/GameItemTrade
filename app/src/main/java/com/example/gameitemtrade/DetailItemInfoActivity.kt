@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.*
 import com.example.gameitemtrade.Data.ItemInfomation
 import com.example.gameitemtrade.Data.User
+import com.example.gameitemtrade.Tasks.BookMarkTask
 import com.example.gameitemtrade.Tasks.ChatRoomTask
 import com.squareup.picasso.Picasso
 
@@ -23,6 +24,8 @@ class DetailItemInfoActivity : AppCompatActivity() {
         val detail_itemExplain = findViewById(R.id.detail_itemExplain) as TextView
         val detail_seller = findViewById(R.id.detail_seller) as TextView
         val btn_makechat = findViewById(R.id.btn_makechat) as TextView
+        val btn_makebookmark = findViewById(R.id.btn_makebookmark) as TextView
+
 
         //val btn_postItem = findViewById(R.id.btn_postItem_Detail) as Button
 
@@ -53,6 +56,17 @@ class DetailItemInfoActivity : AppCompatActivity() {
                 if(result.equals("Clear")){
                     Toast.makeText(this, "채팅방이 생성이 완료됐습니다.",Toast.LENGTH_SHORT).show()
                 }else{Toast.makeText(this, "채팅방이 이미 생성되었습니다.",Toast.LENGTH_SHORT).show()}
+            }
+        }
+        btn_makebookmark.setOnClickListener{
+            if (buyer.equals(seller)){
+                Toast.makeText(this,"자신의 아이템은 찜 할 수 없어요!",Toast.LENGTH_SHORT).show()
+            }else{
+                val bookMarkTask = BookMarkTask()
+                val result = bookMarkTask.execute(item?.productId).get()
+                if(result.equals("Clear")){
+                    Toast.makeText(this, "아이템을 찜 했습니다.",Toast.LENGTH_SHORT).show()
+                }else{Toast.makeText(this, "이미 찜한 아이템입니다.",Toast.LENGTH_SHORT).show()}
             }
         }
     }

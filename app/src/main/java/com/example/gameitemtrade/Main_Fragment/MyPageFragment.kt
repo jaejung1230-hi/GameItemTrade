@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gameitemtrade.ChangeProfileActivity
 import com.example.gameitemtrade.Chat.ChatRoomActivity
 import com.example.gameitemtrade.Data.User
+import com.example.gameitemtrade.MySelectItemActivity
 import com.example.gameitemtrade.R
 import com.example.gameitemtrade.Tasks.ChatRoomTask
 import com.example.gameitemtrade.UserInfoActivity
@@ -38,7 +39,9 @@ class MyPageFragment : Fragment() {
         val layout_profile = v.findViewById(R.id.layout_profile) as LinearLayout
 
         val btn_update_profile = v.findViewById(R.id.btn_update_profile) as Button
-        val btn_my_chat = v.findViewById(R.id.btn_my_chat) as Button
+        val btn_my_chat = v.findViewById(R.id.btn_my_chat) as LinearLayout
+        val btn_my_bookmark = v.findViewById(R.id.btn_my_bookmark) as LinearLayout
+        val btn_my_item = v.findViewById(R.id.btn_my_item) as LinearLayout
 
         btn_update_profile.setOnClickListener {
             var intent = Intent(requireContext(), ChangeProfileActivity::class.java)
@@ -47,6 +50,16 @@ class MyPageFragment : Fragment() {
 
         btn_my_chat.setOnClickListener {
             var intent = Intent(requireContext(), ChatRoomActivity::class.java)
+            startActivity(intent)
+        }
+        btn_my_bookmark.setOnClickListener {
+            var intent = Intent(requireContext(), MySelectItemActivity::class.java)
+            intent.putExtra("function","Find_BookMark")
+            startActivity(intent)
+        }
+        btn_my_item.setOnClickListener {
+            var intent = Intent(requireContext(), MySelectItemActivity::class.java)
+            intent.putExtra("function","Find_MyItem")
             startActivity(intent)
         }
 

@@ -97,12 +97,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/btn_makebookmark"
             android:layout_weight="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_login_button"
             android:text="찜"
-            android:drawableLeft="@drawable/ic_star_border"
             android:drawablePadding="-25dp"
             android:textStyle="bold"
             android:paddingHorizontal="25dp"

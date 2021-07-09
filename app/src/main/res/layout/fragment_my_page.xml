@@ -7,38 +7,37 @@
     tools:context=".Main_Fragment.MyPageFragment"
     android:orientation="vertical">
 
-<LinearLayout
-    android:id="@+id/layout_profile"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="50dp"
-        app:cardElevation="0dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp">
-
-        <ImageView
-        android:id="@+id/img_profile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:scaleType = "fitXY"
-        android:src="@drawable/nonephoto"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/layout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_loginusername"
-        android:textSize="20dp"
-        android:layout_margin="10dp"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView
+            app:cardCornerRadius="50dp"
+            app:cardElevation="0dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
 
+            <ImageView
+            android:id="@+id/img_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:scaleType = "fitXY"
+            android:src="@drawable/nonephoto"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_loginusername"
+            android:textSize="20dp"
+            android:layout_margin="10dp"
+            android:text="@string/hello_blank_fragment" />
+
+    </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,14 +47,68 @@
         android:backgroundTint="@color/main_color"
         android:id="@+id/btn_update_profile"/>
 
-    <Button
+    <LinearLayout
+        android:paddingVertical="5dp"
+        android:background="@drawable/bottom_boarder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="내 채팅 보기"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:backgroundTint="@color/main_color"
-        android:id="@+id/btn_my_chat"/>
-
-
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/btn_my_chat"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/main_color"
+                app:srcCompat="@drawable/ic_message"
+                tools:ignore="MissingConstraints,VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="내 채팅방"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_my_item"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/main_color"
+                app:srcCompat="@drawable/ic_store"
+                tools:ignore="MissingConstraints,VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="내가 등록한 아이템"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/btn_my_bookmark"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/main_color"
+                app:srcCompat="@drawable/ic_star_border"
+                tools:ignore="MissingConstraints,VectorDrawableCompat" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="내가 찜한 아이템"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
