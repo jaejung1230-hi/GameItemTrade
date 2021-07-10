@@ -1,16 +1,27 @@
 package com.example.gameitemtrade
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.gameitemtrade.Data.ItemInfomation
 import com.example.gameitemtrade.Data.User
 import com.example.gameitemtrade.Tasks.BookMarkTask
 import com.example.gameitemtrade.Tasks.ChatRoomTask
+import com.example.gameitemtrade.Tasks.ItemDeleteTask
+import com.google.android.material.internal.ContextUtils.getActivity
 import com.squareup.picasso.Picasso
 
+
 class DetailItemInfoActivity : AppCompatActivity() {
+    lateinit var product_ID : String
+    lateinit var seller : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_item_info)
@@ -26,14 +37,13 @@ class DetailItemInfoActivity : AppCompatActivity() {
         val btn_makechat = findViewById(R.id.btn_makechat) as TextView
         val btn_makebookmark = findViewById(R.id.btn_makebookmark) as TextView
 
-
         //val btn_postItem = findViewById(R.id.btn_postItem_Detail) as Button
 
         val secondIntent = intent
         val buyer = User.userID
         val item = secondIntent.getParcelableExtra<ItemInfomation>("item")
         Picasso.get().load(item?.fileName).error(R.drawable.nonephoto).into(iv_itemImage)
-        Log.d("test", "로 : " + item?.fileName)
+        product_ID = item?.productId.toString()
         detail_itemTitle.setText(item?.title)
         detail_itemPrice.setText(item?.price.toString())
         detail_itemKinds.setText(item?.kind)
@@ -41,7 +51,8 @@ class DetailItemInfoActivity : AppCompatActivity() {
         detail_gameServer.setText(item?.gameServer)
         detail_itemExplain.setText(item?.explain)
         detail_seller.setText(item?.seller)
-        val seller = item?.seller
+        seller = item?.seller.toString()
+
         if(buyer.equals(seller)){
             btn_makechat.setEnabled(false);
             btn_makechat.setBackgroundResource(R.drawable.custom_unable_button)
@@ -69,5 +80,21 @@ class DetailItemInfoActivity : AppCompatActivity() {
                 }else{Toast.makeText(this, "이미 찜한 아이템입니다.",Toast.LENGTH_SHORT).show()}
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if(User.userID.equals(seller)){
+            val inflater = menuInflater
+            inflater.inflate(R.menu.item_detail_info_menu, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_delete_item -> {
+                val task = ItemDeleteTask(); task.execute(product_ID); finish();}
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

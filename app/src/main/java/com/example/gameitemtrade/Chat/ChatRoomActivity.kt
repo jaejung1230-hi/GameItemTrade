@@ -31,7 +31,7 @@ class ChatRoomActivity : AppCompatActivity() {
             for (i in 0..(listArray.length()-1)){
                 chatInfoList.add(listArray.getJSONObject(i).getString("chatRoom"))
             }
-            val adapter = ChatRoomAdapter(chatInfoList)
+            val adapter = ChatRoomAdapter(chatInfoList,this)
             recyclerview_chatList.setLayoutManager(LinearLayoutManager(this))
             recyclerview_chatList.setAdapter(adapter)
         }
