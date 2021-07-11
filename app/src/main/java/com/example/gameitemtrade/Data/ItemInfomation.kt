@@ -20,6 +20,7 @@ class ItemInfomation() : Parcelable {
     lateinit var seller : String
     var latitude :String? =null
     var longitude :String? = null
+    var state :String? = null
 
     constructor(item : JSONObject) : this() {
         this.productId = item.getString("productID")
@@ -35,6 +36,7 @@ class ItemInfomation() : Parcelable {
             this.latitude = item.getString("latitude")
             this.longitude = item.getString("longitude")
                         }
+        this.state = item.getString("state")
     }
 
     constructor(parcel: Parcel): this() {
@@ -48,6 +50,7 @@ class ItemInfomation() : Parcelable {
             gameServer = readString().toString()
             kind = readString().toString()
             seller = readString().toString()
+            state = readString().toString()
             if(!latitude.equals("null") && !longitude.equals("null") ) {
                 latitude = readString().toString()
                 longitude = readString().toString()
@@ -65,11 +68,11 @@ class ItemInfomation() : Parcelable {
             parcel.writeString(gameServer)
             parcel.writeString(kind)
             parcel.writeString(seller)
+            parcel.writeString(state)
             if(!latitude.equals("null") && !longitude.equals("null")) {
                 parcel.writeString(latitude!!)
                 parcel.writeString(longitude!!)
             }
-
         }
 
         override fun create(parcel: Parcel): ItemInfomation {

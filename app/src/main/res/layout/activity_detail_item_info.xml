@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,12 +22,40 @@
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/nonephoto"/>
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/detail_itemTitle"
-                android:textSize="30dp" />
+                android:orientation="horizontal">
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:padding="3dp"
+                    android:text="판매 완료"
+                    android:textColor="@color/gray"
+                    android:background="@drawable/item_sold_out"
+                    android:id="@+id/detail_item_sold_out"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="15dp"
+                    android:padding="3dp"
+                    android:text="예약중"
+                    android:textColor="#00FF00"
+                    android:background="@drawable/item_reserved"
+                    android:id="@+id/detail_item_reserved"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_itemTitle"
+                    android:text="제목"
+                    android:textSize="30dp" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

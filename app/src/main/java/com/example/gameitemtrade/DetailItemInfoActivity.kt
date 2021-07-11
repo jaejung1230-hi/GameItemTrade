@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.example.gameitemtrade.Data.User
 import com.example.gameitemtrade.Tasks.BookMarkTask
 import com.example.gameitemtrade.Tasks.ChatRoomTask
 import com.example.gameitemtrade.Tasks.ItemDeleteTask
+import com.example.gameitemtrade.Tasks.StateUpdateTask
 import com.google.android.material.internal.ContextUtils.getActivity
 import com.squareup.picasso.Picasso
 
@@ -36,6 +38,8 @@ class DetailItemInfoActivity : AppCompatActivity() {
         val detail_seller = findViewById(R.id.detail_seller) as TextView
         val btn_makechat = findViewById(R.id.btn_makechat) as TextView
         val btn_makebookmark = findViewById(R.id.btn_makebookmark) as TextView
+        val detail_item_reserved:TextView = findViewById(R.id.detail_item_reserved)
+        val detail_item_sold_out:TextView = findViewById(R.id.detail_item_sold_out)
 
         //val btn_postItem = findViewById(R.id.btn_postItem_Detail) as Button
 
@@ -52,6 +56,11 @@ class DetailItemInfoActivity : AppCompatActivity() {
         detail_itemExplain.setText(item?.explain)
         detail_seller.setText(item?.seller)
         seller = item?.seller.toString()
+
+        when(item?.state){
+            "1" -> {detail_item_reserved.setVisibility(View.VISIBLE)}
+            "2" -> {detail_item_sold_out.setVisibility(View.VISIBLE)}
+        }
 
         if(buyer.equals(seller)){
             btn_makechat.setEnabled(false);
@@ -94,6 +103,12 @@ class DetailItemInfoActivity : AppCompatActivity() {
         when(item.itemId) {
             R.id.menu_delete_item -> {
                 val task = ItemDeleteTask(); task.execute(product_ID); finish();}
+            R.id.menu_sell -> {
+                val task = StateUpdateTask(); task.execute(product_ID,"0"); }
+            R.id.menu_reserved -> {
+                val task = StateUpdateTask(); task.execute(product_ID,"1"); }
+            R.id.menu_sold_out -> {
+                val task = StateUpdateTask(); task.execute(product_ID,"2"); }
         }
         return super.onOptionsItemSelected(item)
     }

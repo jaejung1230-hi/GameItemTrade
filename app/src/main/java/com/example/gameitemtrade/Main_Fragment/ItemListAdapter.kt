@@ -42,11 +42,17 @@ class ItemListAdapter(private val items: ArrayList<ItemInfomation>) : RecyclerVi
         val itemlist_recycler_name: TextView = v.findViewById(R.id.itemlist_recycler_name)
         val itemlist_recycler_price: TextView = v.findViewById(R.id.itemlist_recycler_price)
         val itemlist_recycler_image: ImageView = v.findViewById(R.id.itemlist_recycler_image)
+        val itemlist_recycler_reserved:TextView = v.findViewById(R.id.itemlist_recycler_reserved)
+        val itemlist_recycler_sold_out:TextView = v.findViewById(R.id.itemlist_recycler_sold_out)
         fun bind(listener: View.OnClickListener, item : ItemInfomation){
             v.setOnClickListener(listener)
             itemlist_recycler_name.setText(item.title)
             itemlist_recycler_price.setText(item.price.toString())
-            Picasso.get().load(item.fileName).error(R.drawable.nonephoto).into(itemlist_recycler_image);
+            Picasso.get().load(item.fileName).error(R.drawable.nonephoto).into(itemlist_recycler_image)
+            when(item.state){
+                "1" -> {itemlist_recycler_reserved.setVisibility(View.VISIBLE)}
+                "2" -> {itemlist_recycler_sold_out.setVisibility(View.VISIBLE)}
+            }
         }
     }
 }
