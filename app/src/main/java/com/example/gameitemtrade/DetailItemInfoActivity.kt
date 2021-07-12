@@ -1,6 +1,7 @@
 package com.example.gameitemtrade
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -56,6 +57,12 @@ class DetailItemInfoActivity : AppCompatActivity() {
         detail_itemExplain.setText(item?.explain)
         detail_seller.setText(item?.seller)
         seller = item?.seller.toString()
+
+        detail_seller.setOnClickListener {
+            var intent = Intent(this, UserInfoActivity::class.java)
+            intent.putExtra("select_user", seller)
+            startActivity(intent)
+        }
 
         when(item?.state){
             "1" -> {detail_item_reserved.setVisibility(View.VISIBLE)}
