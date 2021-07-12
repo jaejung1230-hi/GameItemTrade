@@ -28,3 +28,10 @@ enum class dungunandfighter_server_array(){
     디레지에(),
     바칼(),
 }
+
+enum class report_array(){
+    욕설_비매너(),
+    판매글의_내용과_달라요(),
+    물건을_못받았어요(),
+    기타(),
+}
