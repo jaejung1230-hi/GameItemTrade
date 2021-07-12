@@ -1,17 +1,24 @@
 package com.example.gameitemtrade.Chat
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gameitemtrade.Data.ItemInfomation
 import com.example.gameitemtrade.Data.User
+import com.example.gameitemtrade.PostReportActivity
 import com.example.gameitemtrade.R
 import com.example.gameitemtrade.Tasks.ChatTask
+import com.example.gameitemtrade.Tasks.ItemDeleteTask
+import com.example.gameitemtrade.Tasks.StateUpdateTask
+import com.example.gameitemtrade.TempActivity
 import kotlinx.android.synthetic.main.activity_chat.*
 import org.java_websocket.WebSocket
 import org.java_websocket.client.WebSocketClient
@@ -154,6 +161,28 @@ class ChatActivity : AppCompatActivity() {
         mWebSocketClient.send(message)
         //채팅 입력창 초기화
         chating_Text.setText("")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.chat_menu, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.post_report -> {
+                val str = chatroom!!.split("_")
+                val productID = str[1]
+                var intent = Intent(this, PostReportActivity::class.java)
+                intent.putExtra("suspect",sender)
+                intent.putExtra("productID",productID)
+                startActivity(intent)
+            }
+            R.id.menu_sell -> {}
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
