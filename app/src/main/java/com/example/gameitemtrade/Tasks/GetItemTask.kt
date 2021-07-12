@@ -26,6 +26,11 @@ public class GetItemTask : AsyncTask<String, Void, String>(){
                     .add("longitude",params[1])
                     .add("distance",params[2])
                     .build()
+        } else if(params[lastNum].equals("Get_ItemList_ID")){
+            url = "http://192.168.55.69:65001/Get_ItemList_ID"
+            requestBody  = FormBody.Builder()
+                .add("productID",params[0])
+                .build()
         }
 
         val client = OkHttpClient()
