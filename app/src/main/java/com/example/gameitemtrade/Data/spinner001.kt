@@ -1,4 +1,4 @@
-package com.example.gameitemtrade
+package com.example.gameitemtrade.Data
 
 enum class game_array(val games: String){
     메이플스토리("maplestory_server_array"),

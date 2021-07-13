@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailReportActivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_itemImage_report_ditail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nonephoto"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/report_target_ditail"
+            android:layout_weight="1"
+            android:text="제목"
+            android:background="#00FF00"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_marginRight="5dp"
+            android:textAlignment="textEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/report_suspect_ditail"
+            android:layout_weight="1"
+            android:text="제목"
+            android:background="#FF0000"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:gravity="end" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_itemTitle_ditail"
+        android:text="제목"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_price_ditail"
+        android:text="00000원"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_game_server_kind_ditail"
+        android:text="00000원"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_reason_ditail"
+        android:text="00000원"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_marginHorizontal="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/report_explain_ditail"
+        android:textSize="15dp" />
+
+
+</LinearLayout>

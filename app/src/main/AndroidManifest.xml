@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameItemTrade"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PostReportActivity"></activity>
+        <activity android:name=".DetailReportActivity"></activity>
+        <activity android:name=".PostReportActivity" />
         <activity android:name=".MySelectItemActivity" />
         <activity android:name=".Chat.ChatRoomActivity" />
         <activity android:name=".UserInfoActivity" />
