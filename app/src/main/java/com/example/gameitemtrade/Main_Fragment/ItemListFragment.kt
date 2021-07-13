@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gameitemtrade.*
 import com.example.gameitemtrade.Data.ItemInfomation
+import com.example.gameitemtrade.Data.dungunandfighter_server_array
+import com.example.gameitemtrade.Data.lostark_server_array
+import com.example.gameitemtrade.Data.maplestory_server_array
 import com.example.gameitemtrade.Tasks.GetItemTask
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONArray

@@ -52,13 +52,17 @@ class PageActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 transaction.commit()
                 return true }
 
-                /*
+
             R.id.action_report ->{
+                var reportFragment = ReportFragment()
+                var bundle = Bundle()
+                bundle.putString("gameTitle",gameTitle)
+                reportFragment.arguments = bundle
                 val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.frame,MainFragment())
+                transaction.replace(R.id.frame,reportFragment)
                 transaction.commit()
                 return true }
-             */
+
         }
         return false
     }
