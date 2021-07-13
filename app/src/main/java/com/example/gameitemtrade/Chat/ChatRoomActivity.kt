@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gameitemtrade.Data.ItemInfomation
 import com.example.gameitemtrade.Data.User
-import com.example.gameitemtrade.GameListAdapter
-import com.example.gameitemtrade.Main_Fragment.ItemListAdapter
 import com.example.gameitemtrade.R
 import com.example.gameitemtrade.Tasks.FindChatTask
-import com.example.gameitemtrade.game_array
 import org.json.JSONArray
 
 class ChatRoomActivity : AppCompatActivity() {
