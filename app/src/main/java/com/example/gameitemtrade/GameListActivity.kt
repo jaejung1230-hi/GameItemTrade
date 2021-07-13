@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gameitemtrade.Data.game_array
 
 class GameListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gameitemtrade.Data.game_array
 import com.example.gameitemtrade.Main_Fragment.PageActivity
 import com.example.gameitemtrade.Tasks.UserInfoTask
 

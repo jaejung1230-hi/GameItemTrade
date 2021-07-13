@@ -10,7 +10,6 @@ import android.database.Cursor
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.MediaStore
@@ -20,6 +19,10 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.gameitemtrade.Data.dungunandfighter_server_array
+import com.example.gameitemtrade.Data.game_array
+import com.example.gameitemtrade.Data.lostark_server_array
+import com.example.gameitemtrade.Data.maplestory_server_array
 import com.example.gameitemtrade.Tasks.UploadTask
 import com.google.android.gms.location.*
 
@@ -91,7 +94,7 @@ class AddItemActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("test",game_array.values()[position].games)
+                Log.d("test", game_array.values()[position].games)
                 val selectedgame = game_array.values()[position].games
                 //val clazz  = Class.forName(selectedgame)
                 // 여기를 단축시켜야 하는데 string으로 클래스를 만드려면 어떻게 해야 할까...
