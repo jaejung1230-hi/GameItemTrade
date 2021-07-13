@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import com.example.gameitemtrade.Data.ItemInfomation
-import com.example.gameitemtrade.Data.User
+import com.example.gameitemtrade.Data.report_array
 import com.example.gameitemtrade.Tasks.*
 import com.squareup.picasso.Picasso
 import org.json.JSONArray
