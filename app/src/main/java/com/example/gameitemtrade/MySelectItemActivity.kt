@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gameitemtrade.Data.ItemInfomation
+import com.example.gameitemtrade.Data.User
 import com.example.gameitemtrade.Main_Fragment.ItemListAdapter
 import com.example.gameitemtrade.Tasks.GetItemTask
 import com.example.gameitemtrade.Tasks.SelectItemTask
@@ -21,7 +22,7 @@ class MySelectItemActivity : AppCompatActivity() {
         val function = secondIntent.getStringExtra("function").toString()
 
         val task = SelectItemTask()
-        var result = task.execute(function).get()
+        var result = task.execute(User.userID,function).get()
         val itemListArray = JSONArray(result)
         val itemInfoList: ArrayList<ItemInfomation> = arrayListOf<ItemInfomation>()
         if (!result.equals("[]")) {

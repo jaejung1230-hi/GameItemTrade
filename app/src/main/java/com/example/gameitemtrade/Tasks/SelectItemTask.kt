@@ -11,11 +11,11 @@ public class SelectItemTask : AsyncTask<String, Void, String>(){
     override fun doInBackground(vararg params: String?): String {
         lateinit var url : String
         val requestBody = FormBody.Builder()
-            .add("name", User.userID)
+            .add("name", params[0])
             .build()
-        if(params[0].equals("Find_BookMark")){
+        if(params[1].equals("Find_BookMark")){
             url = "http://192.168.55.69:65001/Find_BookMark"
-        } else if(params[0].equals("Find_MyItem")){
+        } else if(params[1].equals("Find_MyItem")){
             url = "http://192.168.55.69:65001/Find_MyItem"
         }
 
