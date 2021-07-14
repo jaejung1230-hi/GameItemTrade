@@ -21,6 +21,12 @@ public class GetReportTask : AsyncTask<String, Void, String>(){
                 .add("suspect",params[4])
                 .build()
         }
+        if(params[lastNum].equals("Get_report_user")){
+            url = "http://192.168.55.69:65001/Get_report_user"
+            requestBody  = FormBody.Builder()
+                    .add("userID",params[0])
+                    .build()
+        }
 
         val client = OkHttpClient()
 
