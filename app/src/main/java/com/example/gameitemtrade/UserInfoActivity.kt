@@ -44,19 +44,19 @@ class UserInfoActivity : AppCompatActivity() {
         val attitude_point = User.getInt("attitude")
         lateinit var  attitude_point_str:String
         if(attitude_point>=100){
-            attitude_point_str = "매우 긍정적인" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "매우 긍정적인 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else if(attitude_point>=80){
-            attitude_point_str = "긍정적인" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "긍정적인 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else if(attitude_point>=60){
-            attitude_point_str = "판매를 해본" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "판매를 해본 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else if(attitude_point>=45){
-            attitude_point_str = "일반적인" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "일반적인 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else if(attitude_point>=35){
-            attitude_point_str = "부정적 평가를 받고있는" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "부정적 평가를 받고있는 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else if(attitude_point>=20){
-            attitude_point_str = "위험한" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "위험한 " + attitude_point.toString()+ "점의 유저입니다!!"
         }else{
-            attitude_point_str = "최악의 평가를 받은" + attitude_point.toString()+ "점의 유저입니다!!"
+            attitude_point_str = "최악의 평가를 받은 " + attitude_point.toString()+ "점의 유저입니다!!"
         }
         tv_selectUser_point.text = attitude_point_str
 
