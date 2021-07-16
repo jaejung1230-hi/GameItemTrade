@@ -22,7 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameItemTrade"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailReportActivity"></activity>
+        <service
+            android:name=".services.MessageService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".DetailReportActivity" />
         <activity android:name=".PostReportActivity" />
         <activity android:name=".MySelectItemActivity" />
         <activity android:name=".Chat.ChatRoomActivity" />
