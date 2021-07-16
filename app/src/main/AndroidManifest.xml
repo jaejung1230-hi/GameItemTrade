@@ -22,10 +22,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameItemTrade"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ChoicePlaceActivity"></activity>
+
         <service
             android:name=".services.MessageService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity android:name=".DetailReportActivity" />
         <activity android:name=".PostReportActivity" />
