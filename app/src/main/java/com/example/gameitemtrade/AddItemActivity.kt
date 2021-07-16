@@ -28,6 +28,7 @@ import com.google.android.gms.location.*
 
 class AddItemActivity : AppCompatActivity() {
     private val GET_GALLERY_IMAGE = 200
+    private val GET_LOCATION = 3000
     private var iv_itemImage : ImageView? = null
     private var img_path : String? = null
     private var imageName : String? = null
@@ -35,7 +36,6 @@ class AddItemActivity : AppCompatActivity() {
     lateinit var mFusedLocationClient: FusedLocationProviderClient
     var latitude : Double? = null
     var longitude : Double? = null
-    var locationAgree : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,15 +51,9 @@ class AddItemActivity : AppCompatActivity() {
         val spinner_gameServer = findViewById(R.id.spinner_gameServer) as Spinner
         val edit_itemExplain = findViewById(R.id.edit_itemExplain) as EditText
         val btn_postItem = findViewById(R.id.btn_postItem) as Button
-        val btn_location = findViewById(R.id.btn_location) as ToggleButton
+        val btn_location = findViewById(R.id.btn_location) as Button
 
         btn_postItem.setOnClickListener {
-            if(locationAgree){
-                if (longitude == null || latitude == null) {
-                    Toast.makeText(this, "작업중 오류 발생 잠시후에 다시 시도해 주세요", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-            }
             val testTask = UploadTask()
             val result = testTask.execute(
                     img_path,
@@ -70,20 +64,14 @@ class AddItemActivity : AppCompatActivity() {
                     spinner_gameTitle.selectedItem.toString(),
                     spinner_gameServer.selectedItem.toString(),
                    latitude.toString(),longitude.toString()).get()
-            if(result.equals("Clear")){Toast.makeText(this, "등록성공!!", Toast.LENGTH_SHORT).show()}
+            if(result.equals("Clear")){Toast.makeText(this, "등록성공!!", Toast.LENGTH_SHORT).show(); finish()}
         }
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        btn_location.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                getLastLocation()
-                locationAgree = true
-            }else{
-                latitude  = null
-                longitude  = null
-                locationAgree = false
-            }
-             Log.d("CheckCurrentLocation", "현재 내 위치 값: ${latitude}, ${longitude}, ${locationAgree}")
+        btn_location.setOnClickListener {
+            val intent = Intent(this,ChoicePlaceActivity::class.java)
+            startActivityForResult(intent,GET_LOCATION)
+
         }
 
         spinner_itemKinds.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, arrayOf("게임머니","장비 아이템","캐시 아이템"))
@@ -124,6 +112,17 @@ class AddItemActivity : AppCompatActivity() {
             val image_bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
             iv_itemImage?.setImageBitmap(image_bitmap)
         }
+
+        if(requestCode == GET_LOCATION){
+            latitude = data?.getDoubleExtra("latitude",0.0)
+            longitude = data?.getDoubleExtra("longitude",0.0)
+            if(latitude  == 0.0 && longitude  == 0.0){
+                latitude = null
+                longitude = null
+            }
+            Log.d("test", "위치 수신 : " + latitude.toString());
+            Log.d("test", "위치 수신 : " + longitude.toString());
+        }
     }
 
     fun getImagePathToUri(data : Uri):String {
@@ -144,90 +143,4 @@ class AddItemActivity : AppCompatActivity() {
 
         return imgPath;
     }//end of getImagePathToUri()
-
-    @SuppressLint("MissingPermission")
-    private fun getLastLocation() {
-        if (checkPermissions()) {
-            if (isLocationEnabled()) {
-
-                mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-                    var location: Location? = task.result
-                    if (location == null) {
-                        requestNewLocationData()
-                    } else {
-                        latitude  = location.latitude
-                        longitude  = location.longitude
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Turn on location", Toast.LENGTH_LONG).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
-            }
-        } else {
-            requestPermissions()
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun requestNewLocationData() {
-        var mLocationRequest = LocationRequest()
-        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        mLocationRequest.interval = 0
-        mLocationRequest.fastestInterval = 0
-        mLocationRequest.numUpdates = 1
-
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        mFusedLocationClient!!.requestLocationUpdates(
-            mLocationRequest, mLocationCallback,
-            Looper.myLooper()
-        )
-    }
-
-    private val mLocationCallback = object : LocationCallback() {
-        override fun onLocationResult(locationResult: LocationResult) {
-            var mLastLocation: Location = locationResult.lastLocation
-            findViewById<TextView>(R.id.latTextView).text = mLastLocation.latitude.toString()
-            findViewById<TextView>(R.id.lonTextView).text = mLastLocation.longitude.toString()
-        }
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        var locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
-    private fun checkPermissions(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
-            PERMISSION_ID
-        )
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == PERMISSION_ID) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                getLastLocation()
-            }
-        }
-    }
-
 }
