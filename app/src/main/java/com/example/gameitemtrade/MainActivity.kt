@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
                 if(result.equals("None")){
                     Toast.makeText(this,"ID 또는 비밀번호를 확인해주세요!!",Toast.LENGTH_SHORT).show()
                 }else{
-                    val sintent = Intent(this, MessageService::class.java)
+                    //val sintent = Intent(this, MessageService::class.java)
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                        startForegroundService(sintent);
-                    else startService(sintent);
+                    //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    //    startForegroundService(sintent);
+                    //else startService(sintent);
 
                     var intent = Intent(this, GameListActivity::class.java)
                     startActivity(intent)
